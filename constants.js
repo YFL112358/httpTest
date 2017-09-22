@@ -5,10 +5,15 @@ exports.VERSON = {
 }
 exports.PATHS = {
     INDEX: "/index",
-    API_TEST: "/api_test",    
+    API_TEST: "/api_test",
+    TURTORIAL: "/turtorial",
+    STUDENT: "/student",
 }
 exports.PARAMS = {
     ACTION: "/:action",
+}
+exports.ACTION = {
+    LIST: "/list",
 }
 exports.RET_CODE = {
   OK: 1000,

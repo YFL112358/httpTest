@@ -1,6 +1,14 @@
-
 html
   head
     title= title
   body
-    h1= message
+    table
+        tr
+            th  Firstname
+            th  Lastname
+            th  Age
+        for student, i in students
+            tr
+            th=  student.firstname
+            th=  student.lastname
+            th=  student.age

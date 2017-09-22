@@ -19,8 +19,8 @@ v3Router.get(constants.PARAMS.ACTION, function (req, res) {
 });
 
 //3.3
-
-v3Router.post('/:action' ,function(req, res){
+app.use(constants.PATHS.INDEX, express.static('public'))
+v3Router.post(constants.PARAMS.ACTION ,function(req, res){
     const a = req.body.a;
     const b = req.body.b;
     const action = req.params.action
@@ -31,19 +31,28 @@ v3Router.post('/:action' ,function(req, res){
         'ret'    : constants.RET_CODE.OK,
     });    
 });
-app.use(constants.VERSON.VERSION_3, v3Router);
 
 //3.4
+app.set('view engine','pug');
+app.set('views', './views');
+v3Router.get(constants.PATHS.TURTORIAL + constants.PATHS.STUDENT + constants.ACTION.LIST , function(req, res){
+    const students = [];
 
+    for(i = 0; i < 3; i ++){
+        const student = new Object();
+        student.firstname = 'ning' + i;
+        student.lastname = 'shining' + i;
+        student.age = parseInt(Math.random() * 100);
+        students[i] = student
+    }   
+    res.render('index', { students: students})
+})
 
-//app.set('view engine','pug');
-//app.set('views', './views');
+app.use(constants.VERSON.VERSION_3, v3Router);
 
-app.use(constants.PATHS.INDEX, express.static('public'))
-
-var server = app.listen(3000, function () {
-var host = server.address().address;
-var port = server.address().port;
+const server = app.listen(3000, function () {
+const host = server.address().address;
+const port = server.address().port;
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
