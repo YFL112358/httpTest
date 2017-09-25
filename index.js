@@ -1,5 +1,6 @@
 const constants = require('./constants')
 const express = require('express');
+const log4js = require('log4js');
 const app = express();
 const bodyParser = require('body-parser');
 const v3Router = express.Router();
@@ -46,8 +47,28 @@ v3Router.get(constants.PATHS.TURTORIAL + constants.RESOURCE.STUDENT + constants.
         students[i] = student
     }   
     res.render('index', { students: students})
-})
+});
 
+//3.5
+app.use(constants.PATHS.LOGIN, express.static('public/login'))
+v3Router.post(constants.RESOURCE.PETER + constants.LOG_LEVEL.DEBUG + constants.ACTION.APPEND, function(req, res){
+    log4js.configure({
+        appenders: { peter: { type: 'file', filename: 'log/perter.log' } },
+        categories: { default: { appenders: ['peter'], level: 'debug' } }
+});
+    const logger = log4js.getLogger('peter');
+    if(req.body.user == "peter" && req.body.password== "password"){
+        logger.debug('login success');
+        res.json({
+            'ret'    : constants.RET_CODE.OK,
+        }); 
+    } else {
+        res.json({
+            'ret'    : constants.RET_CODE.ERROR,
+        }); 
+        logger.error('login error');
+    }   
+});
 app.use(constants.VERSON.VERSION_3, v3Router);
 
 const server = app.listen(3000, function () {
