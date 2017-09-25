@@ -5,6 +5,10 @@ exports.PATHS = {
     INDEX: "/index",
     API_TEST: "/api_test",
     TURTORIAL: "/turtorial",
+    USER: "/user",
+    WALLET: "/wallet",
+    SELF: "/self",
+    DETAIL: "/detail"
 }
 exports.RESOURCE = {
     STUDENT: "/student",
@@ -15,7 +19,8 @@ exports.LOG_LEVEL = {
 } 
 exports.PARAMS = {
     ACTION: "/:action",
-    VERSION: "/:version"
+    VERSION: "/:version",
+    USER_ID: "/:user_id",
 }
 exports.ACTION = {
     LIST: "/list",

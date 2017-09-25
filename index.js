@@ -3,6 +3,7 @@ const express = require('express');
 const log4js = require('log4js');
 const app = express();
 const bodyParser = require('body-parser');
+const db = require('./dao/db.js');
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded  
@@ -73,7 +74,22 @@ app.post(constants.PARAMS.VERSION + constants.RESOURCE.USER + constants.LOG_LEVE
 });
 
 //3.6 Hiding Your Authentication Protected Service behind AuthMiddleware
-
+app.get(constants.PATHS.USER + constants.PARAMS.USER_ID + constants.PATHS.WALLET + constants.PATHS.SELF + constants.PATHS.DETAIL, function(req, res){
+    const userId = req.params.user_id;
+    const intAuthToken = req.query.intAuthToken;
+    db.query("select * from  token  where id ='"+userId +"'", function (err, rows) {
+        if (err) {
+            console.log(err);
+            res.send({ret:1001});  
+        } else {
+            if (rows != null && rows[0].intAuthToken == intAuthToken){
+                res.send({ret: 1000});
+            } else {
+                res.send({ret: 1001});
+            }
+        }
+    });
+});
 
 const server = app.listen(3000, function () {
 const host = server.address().address;
