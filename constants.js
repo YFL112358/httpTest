@@ -1,7 +1,5 @@
 'use-strict';
-exports.VERSON = {
-    VERSION_3: '/v3'    
-}
+
 exports.PATHS = {
     LOGIN: "/login",
     INDEX: "/index",
@@ -10,13 +8,14 @@ exports.PATHS = {
 }
 exports.RESOURCE = {
     STUDENT: "/student",
-    PETER: "/peter",
+    USER: "/:user",
 }
 exports.LOG_LEVEL = {
-    DEBUG: "/debug",
+    LEVEL: "/:level",
 } 
 exports.PARAMS = {
     ACTION: "/:action",
+    VERSION: "/:version"
 }
 exports.ACTION = {
     LIST: "/list",
