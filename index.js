@@ -35,7 +35,7 @@ v3Router.post(constants.PARAMS.ACTION ,function(req, res){
 //3.4
 app.set('view engine','pug');
 app.set('views', './views');
-v3Router.get(constants.PATHS.TURTORIAL + constants.PATHS.STUDENT + constants.ACTION.LIST , function(req, res){
+v3Router.get(constants.PATHS.TURTORIAL + constants.RESOURCE.STUDENT + constants.ACTION.LIST , function(req, res){
     const students = [];
 
     for(i = 0; i < 3; i ++){
