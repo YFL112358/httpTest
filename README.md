@@ -5,7 +5,7 @@
 - nodejs: 6.0+
 - mysql :5.0+
 以上的安装和初始化可参考：https://github.com/genxium/Ubuntu14InitScripts
-##安装步骤：
+## 安装步骤：
 1、git clone https://github.com/shareming7/httpTest.git  
       
 2、cd httpTest  
