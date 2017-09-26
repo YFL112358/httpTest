@@ -1,9 +1,17 @@
 const mysql = require('mysql');
+
+const baseAbsPath = __dirname + '/';
+const fs = require('fs');
+const yaml = require('js-yaml');
+const mysqlConfig = yaml.safeLoad(fs.readFileSync(baseAbsPath + '../config/mysql.conf', 'utf8'));
+
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '123456',
-    database: 'httpTest'
+    connectionLimit: mysqlConfig.connectionLimit,
+    host: mysqlConfig.host,
+    port: mysqlConfig.port,
+    user: mysqlConfig.user,
+    password: mysqlConfig.password,
+    database: mysqlConfig.database    
 });
 
 function query(sql, callback) {

@@ -10,7 +10,11 @@ npm install
 ```
 node index.js
 ```
-4、运行demo  
+4、更改数据库config
+```
+sh ./dbConfig.sh
+```
+5、运行demo  
 - 3.1: http://localhost:3000/v3/test  
 
 - 3.2 http://localhost:3000/v3/plus?a=2&b=3  
@@ -23,4 +27,4 @@ node index.js
     - 进入此页的user password中输入任意字符串 .然后点击login 按钮，会跳到 http://localhost:3000/v3/peter/debug/append .并且会在log 文件夹下生成peter.log文件
     - 如果 user＝peter password＝password 返回ret:1000 ,并且log文件打印login sucess，否则返回ret:1001, 并且log文件打印login error.
 - 3.6 http://localhost:3000/user/sp100029/wallet/self/detail  返回ret:1001
-      http://localhost:3000/user/sp100029/wallet/self/detail?intAuthToken=xxxyyyzz  返回1000  (数据库脚本还没写)
+      http://localhost:3000/user/sp100029/wallet/self/detail?intAuthToken=xxxyyyzz  返回1000  
