@@ -27,4 +27,7 @@ sh ./dbConfig.sh
     - 进入此页的user password中输入任意字符串 .然后点击login 按钮，会跳到 http://localhost:3000/v3/peter/debug/append .并且会在log 文件夹下生成peter.log文件
     - 如果 user＝peter password＝password 返回ret:1000 ,并且log文件打印login sucess，否则返回ret:1001, 并且log文件打印login error.
 - 3.6 http://localhost:3000/user/sp100029/wallet/self/detail  返回ret:1001
-      http://localhost:3000/user/sp100029/wallet/self/detail?intAuthToken=xxxyyyzz  返回1000  
+      http://localhost:3000/user/sp100029/wallet/self/detail?intAuthToken=xxxyyyzz  返回1000 
+- 3.7 在 console 台 运行：apidoc  -o apidoc/ -f "app\\.js"  
+ 
+并且在浏览器打开 httpTest/apidoc/index.html 可以看到相应的apidoc

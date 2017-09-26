@@ -2,8 +2,9 @@
   "name": "hello",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
+    "apidoc": "^0.17.6",
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "fs": "0.0.1-security",
@@ -27,5 +28,5 @@
   "bugs": {
     "url": "https://github.com/shareming7/httpTest/issues"
   },
-  "homepage": "https://github.com/shareming7/httpTest#readme"
+  "homepage": "https://github.com/shareming7/httpTest#readme",
 }
