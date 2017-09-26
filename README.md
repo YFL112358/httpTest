@@ -1,20 +1,29 @@
 # httpTest
+## 可运行的os
+- Ubuntu 14+ 或者Mac osx.
+## 安装坏境
+- nodejs: 6.0+
+- mysql :5.0+
+以上的安装和初始化可参考：https://github.com/genxium/Ubuntu14InitScripts
+##安装步骤：
 1、git clone https://github.com/shareming7/httpTest.git  
+      
+2、cd httpTest  
   
-2、安装依赖：  
+3、安装依赖：  
 ```
 npm install
 ``` 
 
-3、启动项目：
+4、启动项目：
 ```
 node index.js
 ```
-4、更改数据库config
+5、更改数据库config
 ```
 sh ./dbConfig.sh
 ```
-5、运行demo  
+6、运行demo  
 - 3.1 http://localhost:3000/v3/api_test  
 
 - 3.2 http://localhost:3000/v3/plus?a=2&b=3  

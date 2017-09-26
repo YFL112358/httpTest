@@ -96,26 +96,13 @@ app.post(constants.PARAMS.VERSION + constants.RESOURCE.USER + constants.LOG_LEVE
 });
 
 //3.6 Hiding Your Authentication Protected Service behind AuthMiddleware
-app.get(constants.PATHS.USER + constants.PARAMS.USER_ID + constants.PATHS.WALLET + constants.PATHS.SELF + constants.PATHS.DETAIL, function(req, res){
-    const userId = req.params.user_id;
-    const intAuthToken = req.query.intAuthToken;
-    db.query("select * from  token  where id ='"+userId +"'", function (err, rows) {
-        if (err) {
-            console.log(err);
-            res.send({ret:1001});  
-        } else {
-            if (rows != null && rows[0].intAuthToken == intAuthToken){
-                res.send({ret: 1000});
-            } else {
-                res.send({ret: 1001});
-            }
-        }
-    });
-});
+const UserAuth = require ('./middleware/UserAuth').default;
+const userAuth = new UserAuth();
+const intAuthImpl = userAuth.tokenAuth; 
+const createAuthRouter = userAuth.createAuthRouter;
+app.use(constants.PATHS.USER + constants.PARAMS.USER_ID , intAuthImpl, createAuthRouter);
 
 //3.7 Automate Your Documentation
-
-
 const server = app.listen(3000, function () {
 const host = server.address().address;
 const port = server.address().port;
