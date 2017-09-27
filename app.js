@@ -3,8 +3,7 @@ const express = require('express');
 const log4js = require('log4js');
 const app = express();
 const bodyParser = require('body-parser');
-const db = require('./dao/db.js');
-
+const Logger = require('./utils/Logger');
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded  
 
@@ -77,13 +76,8 @@ app.get(constants.PARAMS.VERSION + constants.PATHS.TURTORIAL + constants.RESOURC
 //3.5 Logging to Multiple Files Differentiated by Levels
 app.use(constants.PATHS.LOGIN, express.static('public/login'))
 app.post(constants.PARAMS.VERSION + constants.RESOURCE.USER + constants.LOG_LEVEL.LEVEL + constants.ACTION.APPEND, function(req, res){
-    log4js.configure({
-        appenders: { peter: { type: 'file', filename: "log/" + req.params.user + ".log" } },
-        categories: { default: { appenders: ['peter'], level: req.params.level } }
-    });
-    const logger = log4js.getLogger('peter');
     if(req.body.user == "peter" && req.body.password== "password"){
-        logger.debug('login success');
+       Logger.instance.defaults.debug('begin log'); 
         res.json({
             'ret'    : constants.RET_CODE.OK,
         }); 
@@ -91,7 +85,7 @@ app.post(constants.PARAMS.VERSION + constants.RESOURCE.USER + constants.LOG_LEVE
         res.json({
             'ret'    : constants.RET_CODE.ERROR,
         }); 
-        logger.error('login error');
+        Logger.instance.defaults.error('match error');
     }   
 });
 

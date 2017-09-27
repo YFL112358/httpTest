@@ -1,7 +1,7 @@
 'use strict'
 
 const Sequelize = require('sequelize');
-const MySQLManager = require('../dao/MySQLManager').instance;
+const MySQLManager = require('../utils/MySQLManager').instance;
 const dbConn = MySQLManager.dbRef;
 const token = dbConn.define('token', {
   intAuthToken: Sequelize.STRING,

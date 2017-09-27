@@ -8,7 +8,7 @@ const fs = require('fs');
 
 const Sequelize = require('sequelize');
 
-//const Logger = require('./Logger');
+const Logger = require('./Logger');
 
 class MySQLManager {
   static get instance() {
@@ -55,7 +55,7 @@ class MySQLManager {
       });
     } catch (e) {
       // TODO
-        console.log(e);	
+      Logger.instance.defaults.error(e);
     }
   }
 
