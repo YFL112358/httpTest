@@ -18,7 +18,7 @@ npm install
 
 4、启动项目：
 ```
-node index.js
+node app.js
 ```
 5、更改数据库config
 ```
