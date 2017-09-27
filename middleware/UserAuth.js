@@ -1,27 +1,26 @@
 const constants = require('../constants')
-const db = require('../dao/db.js')
 const express = require('express');
+const Token = require('../model/Token').default;
 
-//没有写进cookie ，方便测试，把intAuthToken写进数据的一张表里面。通过userid来查出intAuthToken.
 const tokenAuthImpl = function(req, res, next) {
   const userId = req.params.user_id;
   const intAuthToken = req.query.intAuthToken;
-  if (intAuthToken == null || intAuthToken=== undefined ) { 
+  if (intAuthToken == null || intAuthToken=== undefined || intAuthToken=='') { 
         res.send({ret:constants.RET_CODE.ERROR});
     } else {
-        db.query("select * from  token  where intAuthToken ='"+intAuthToken +"'", function (err, rows) {
-            if (err) {
-                console.log(err);
-                res.send({ret:constants.RET_CODE.ERROR});  
-            } else {
-                if (rows !== null && rows.length>0 && rows[0].id == userId){
+            return Token.findOne({where:{
+                intAuthToken: intAuthToken,
+            }})
+            .then(function(result){
+                 if (result!= null && result.tokenId == userId){
                     return next();
                 } else {
                     res.send({ret:constants.RET_CODE.ERROR });
-                    console.log('error');
                 }
-            }
-        });    
+            })
+            .catch(function(err){
+                //todo
+            });
     }
 };
 
@@ -33,14 +32,15 @@ const createAuthRouter = function() {
 }; 
 const authRouter = function(req, res){
     const userId = req.params.user_id;
-    db.query("select * from  token  where id ='"+userId +"'", function (err, users) {
-        if(err) {
-            res.send({ret:constants.RET_CODE.ERROR});
-        } else {
-            const user = users[0];
-            res.render('user', { device: user.device, ip: user.ip}); 
-        }
-    });
+        return Token.findOne({where:{
+                tokenId: userId,
+            }})
+            .then(function(user){
+                res.render('user', { device: user.device, ip: user.ip});             
+            })
+            .catch(function(err){
+                //todo
+            })
 };
 
 class UserAuth {
