@@ -6,19 +6,23 @@ const express = require('express');
 const tokenAuthImpl = function(req, res, next) {
   const userId = req.params.user_id;
   const intAuthToken = req.query.intAuthToken;
-    db.query("select * from  token  where id ='"+userId +"'", function (err, rows) {
-        if (err) {
-            console.log(err);
-            res.send({ret:constants.RET_CODE.ERROR});  
-        } else {
-            if (rows != null && rows[0].intAuthToken == intAuthToken){
-                return next();
+  if (intAuthToken == null || intAuthToken=== undefined || intAuthToken == '') { 
+        res.send({ret:constants.RET_CODE.ERROR});
+    } else {
+        db.query("select * from  token  where intAuthToken ='"+intAuthToken +"'", function (err, rows) {
+            if (err) {
+                console.log(err);
+                res.send({ret:constants.RET_CODE.ERROR});  
             } else {
-                res.send({ret:constants.RET_CODE.ERROR });
-                console.log('error');
+                if (rows !== null && rows.length>0 && rows[0].id == userId){
+                    return next();
+                } else {
+                    res.send({ret:constants.RET_CODE.ERROR });
+                    console.log('error');
+                }
             }
-        }
-    });
+        });    
+    }
 };
 
 const createAuthRouter = function() {
