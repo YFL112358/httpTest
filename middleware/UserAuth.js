@@ -6,7 +6,7 @@ const express = require('express');
 const tokenAuthImpl = function(req, res, next) {
   const userId = req.params.user_id;
   const intAuthToken = req.query.intAuthToken;
-  if (intAuthToken == null || intAuthToken=== undefined || intAuthToken == '') { 
+  if (intAuthToken == null || intAuthToken=== undefined ) { 
         res.send({ret:constants.RET_CODE.ERROR});
     } else {
         db.query("select * from  token  where intAuthToken ='"+intAuthToken +"'", function (err, rows) {
